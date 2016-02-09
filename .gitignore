@@ -1,0 +1,8 @@
+/**/build
+
+/**/.gradle
+/**/.project
+/**/.classpath
+
+/study_java/.settings
+!gradle-wrapper.jar
