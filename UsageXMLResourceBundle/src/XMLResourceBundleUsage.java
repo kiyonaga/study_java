@@ -1,7 +1,6 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ResourceBundle;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
@@ -14,6 +13,7 @@ public class XMLResourceBundleUsage
 	{
 		SwingUtilities.invokeLater(new Runnable()
 		{
+			@Override
 			public void run()
 			{
 				// mail.xml というXML形式のリソースを取得。
@@ -26,6 +26,7 @@ public class XMLResourceBundleUsage
 
 				button.addActionListener(new ActionListener()
 				{
+					@Override
 					public void actionPerformed(ActionEvent event)
 					{
 						JButton button = (JButton) event.getSource();
@@ -45,7 +46,6 @@ public class XMLResourceBundleUsage
 		});
 	}
 
-	@SuppressWarnings("unused")
 	public static void main(String[] args)
 	{
 		new XMLResourceBundleUsage();

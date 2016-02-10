@@ -20,6 +20,7 @@ public class XMLResourceBundleControl extends ResourceBundle.Control
 	/**
 	 * 対応するフォーマットを返す.
 	 */
+	@Override
 	public List<String> getFormats(String baseName)
 	{
 		return Arrays.asList(xml);
@@ -35,6 +36,7 @@ public class XMLResourceBundleControl extends ResourceBundle.Control
 	/**
 	 * http://docs.oracle.com/javase/6/docs/api/java/util/ResourceBundle.Control.html
 	 */
+	@Override
 	public ResourceBundle newBundle(String baseName, Locale locale, String format, ClassLoader loader, boolean reload)
 			throws IllegalAccessException, InstantiationException, IOException
 	{
