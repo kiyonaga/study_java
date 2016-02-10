@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
  */
 public class LogTest
 {
-	private static final Logger logger = LoggerFactory.getLogger(LogTest.class);
+	private static final Logger logger = LoggerFactory.getLogger(LogTest.class); // caller class nameを自動で設定してくれるI/Fはなさそう。
 	//	private static final org.apache.logging.log4j.Logger log4j = LogManager.getLogger();
 
 	@Test
