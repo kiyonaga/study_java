@@ -4,9 +4,13 @@ import java.util.ResourceBundle;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class XMLResourceBundleUsage
 {
+	private static final Logger logger = LoggerFactory.getLogger(XMLResourceBundleUsage.class);
+
 	private static final XMLResourceBundleControl xmlctl = new XMLResourceBundleControl();
 
 	public XMLResourceBundleUsage()
@@ -33,6 +37,7 @@ public class XMLResourceBundleUsage
 
 						// getBundleすることで、リソースの再読み込みが行われる。
 						ResourceBundle rb = ResourceBundle.getBundle("mail", xmlctl);
+						logger.debug("title:{} button:{}", rb.getString("title.name"), rb.getString("button.name"));
 						frame.setTitle(rb.getString("title.name"));
 						button.setText(rb.getString("button.name"));
 					}
