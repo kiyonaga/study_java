@@ -73,7 +73,7 @@ public class XMLResourceBundleControl extends ResourceBundle.Control
 				BufferedInputStream bis = new BufferedInputStream(stream);
 				try
 				{
-					bundle = new XMLResourceBundle(bis);
+					bundle = new XMLResourceBundleImpl(bis);
 				}
 				finally
 				{

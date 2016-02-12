@@ -11,8 +11,6 @@ public class XMLResourceBundleUsage
 {
 	private static final Logger logger = LoggerFactory.getLogger(XMLResourceBundleUsage.class);
 
-	private static final XMLResourceBundleControl xmlctl = new XMLResourceBundleControl();
-
 	public XMLResourceBundleUsage()
 	{
 		SwingUtilities.invokeLater(new Runnable()
@@ -21,7 +19,7 @@ public class XMLResourceBundleUsage
 			public void run()
 			{
 				// mail.xml というXML形式のリソースを取得。
-				ResourceBundle rb = ResourceBundle.getBundle("mail", xmlctl);
+				ResourceBundle rb = XMLResourceBundle.getBundle("mail");
 
 				JFrame frame = new JFrame(rb.getString("title.name"));
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -36,7 +34,7 @@ public class XMLResourceBundleUsage
 						JButton button = (JButton) event.getSource();
 
 						// getBundleすることで、リソースの再読み込みが行われる。
-						ResourceBundle rb = ResourceBundle.getBundle("mail", xmlctl);
+						ResourceBundle rb = XMLResourceBundle.getBundle("mail");
 						logger.debug("title:{} button:{}", rb.getString("title.name"), rb.getString("button.name"));
 						frame.setTitle(rb.getString("title.name"));
 						button.setText(rb.getString("button.name"));

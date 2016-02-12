@@ -1,4 +1,5 @@
 import static org.junit.Assert.*;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -8,13 +9,15 @@ public class XMLResourceBundleTest
 {
 	private static final Logger logger = LoggerFactory.getLogger(XMLResourceBundleTest.class);
 
-	private static final XMLResourceBundleControl xmlctl = new XMLResourceBundleControl();
-
 	@Test
 	public void test()
 	{
-		ResourceBundle rb = ResourceBundle.getBundle("mail", xmlctl);
+		ResourceBundle rb = XMLResourceBundle.getBundle("mail");
 		logger.debug("button.name: {}", rb.getString("button.name"));
 		assertTrue("button.name", rb.getString("button.name").equals("へへへ"));
-	}
+
+		rb = XMLResourceBundle.getBundle("mail", Locale.JAPAN);
+		logger.debug("button.name: {}", rb.getString("button.name"));
+		assertTrue("button.name", rb.getString("button.name").equals("へへへ"));
+}
 }
