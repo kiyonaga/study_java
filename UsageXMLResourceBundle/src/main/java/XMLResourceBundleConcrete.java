@@ -8,12 +8,12 @@ import java.util.ResourceBundle;
 /**
  * XMLファイルから構築されるリソースバンドル
  */
-public class XMLResourceBundleImpl extends ResourceBundle
+public class XMLResourceBundleConcrete extends ResourceBundle
 {
 	// XMLリソースバンドルのバックエンドとしてPropertiesクラスを使う.
 	private Properties props = new Properties();
 
-	XMLResourceBundleImpl(InputStream is) throws IOException
+	XMLResourceBundleConcrete(InputStream is) throws IOException
 	{
 		props.loadFromXML(is);
 	}
