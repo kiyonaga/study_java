@@ -20,8 +20,8 @@ public class App
 	@RequestMapping("/")
 	String home()
 	{
-		logger.info("HOHOHO World!");
-		return "HOHOHO world!";
+		logger.info("Hello World!");
+		return "Hello world!";
 	}
 
 	public static void main(String[] args)
