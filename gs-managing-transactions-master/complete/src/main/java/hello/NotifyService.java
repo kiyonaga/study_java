@@ -18,7 +18,7 @@ public class NotifyService
 	private final static Logger log = LoggerFactory.getLogger(NotifyService.class);
 
 	@Autowired
-	JdbcTemplate jdbcTemplate;
+	private JdbcTemplate jdbcTemplate;
 
 	@Transactional
 	public void notify(String... persons)

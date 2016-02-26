@@ -18,7 +18,7 @@ public class BookingService
 	private final static Logger log = LoggerFactory.getLogger(BookingService.class);
 
 	@Autowired
-	JdbcTemplate jdbcTemplate;
+	private JdbcTemplate jdbcTemplate;
 
 	@Transactional
 	public void book(String... persons)

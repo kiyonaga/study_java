@@ -82,13 +82,13 @@ public class Application
 //		bookingService.book("Hoge", "Fuga", "Piyo");
 //		Assert.assertEquals("Final booking should work with no problem", 6, bookingService.findAllBookings().size());
 
-		/////
-
+		///// 複数のServiceを呼び出すTransactionScriptの例。
 		TxScriptService svc = ctx.getBean(TxScriptService.class);
+		// test rollback.
 		try
 		{
-			svc.execute("Foo", "Bar", "Baz");
-			log.info("Success.");
+			svc.executeForceRollback("Foo", "Bar", "Baz");
+			log.info("Done.");
 		}
 		catch (RuntimeException e)
 		{
@@ -97,8 +97,8 @@ public class Application
 
 		try
 		{
-			svc.executeSuc("Foo1", "Bar2", "Baz3");
-			log.info("Success.");
+			svc.execute("Foo1", "Bar2", "Baz3");
+			log.info("Done.");
 		}
 		catch (RuntimeException e)
 		{
