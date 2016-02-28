@@ -57,7 +57,7 @@ public class TxScriptService
 		// - 業務エラーを処理の途中でチェックする場面とは?
 		//
 		// 以下のPat.でrollbackできる。
-		// 1. RuntimeExceptionをthrowする。
+		// 1. RuntimeExceptionをthrowする。エラーとなるのがイケてないか。
 		// 2. rollback文を実行する。
 		// 3. 明示的トランザクションを使用する。
 		//
@@ -72,7 +72,7 @@ public class TxScriptService
 		notifyService.notify(persons);
 
 		// Pat. 1
-		//		throw new BizRuntimeException("Intentional rollback.");
+//				throw new BLogicRuntimeException("Intentional rollback.");
 
 		// Pat. 2 rollback文
 		rollbackService.rollback();
@@ -80,7 +80,7 @@ public class TxScriptService
 		// Pat. 3 明示的トランザクション
 		//		transactionManager.rollback(status);
 
-		return new ServiceResult();
+		return new ServiceResult("ForceRollback"); // Pat. 1の場合はco.
 	}
 
 	/***
@@ -91,10 +91,12 @@ public class TxScriptService
 	@Transactional
 	public ServiceResult execute(String... persons)
 	{
+		ServiceResult ServiceResult = new ServiceResult();
+
 		bookingService.book(persons);
 		notifyService.notify(persons);
 
 		// 戻り値、Class型で返す?
-		return new ServiceResult();
+		return ServiceResult;
 	}
 }
