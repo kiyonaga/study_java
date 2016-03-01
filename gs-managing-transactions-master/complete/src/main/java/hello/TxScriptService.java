@@ -80,7 +80,7 @@ public class TxScriptService
 		// Pat. 3 明示的トランザクション
 		//		transactionManager.rollback(status);
 
-		return new ServiceResult("ForceRollback"); // Pat. 1の場合はco.
+		return ServiceResult.fail("Force rollback."); // Pat. 1の場合はco.
 	}
 
 	/***
@@ -91,12 +91,10 @@ public class TxScriptService
 	@Transactional
 	public ServiceResult execute(String... persons)
 	{
-		ServiceResult ServiceResult = new ServiceResult();
-
 		bookingService.book(persons);
 		notifyService.notify(persons);
 
 		// 戻り値、Class型で返す?
-		return ServiceResult;
+		return ServiceResult.success("Done.");
 	}
 }

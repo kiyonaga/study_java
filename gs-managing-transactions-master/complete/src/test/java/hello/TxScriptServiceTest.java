@@ -3,8 +3,6 @@ package hello;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -13,22 +11,22 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @SpringApplicationConfiguration(classes = Application.class)
 public class TxScriptServiceTest
 {
-	private static final Logger logger = LoggerFactory.getLogger(TxScriptServiceTest.class);
+//	private static final Logger logger = LoggerFactory.getLogger(TxScriptServiceTest.class);
 
 	@Autowired
 	private TxScriptService txScriptService;
 
 	@Test
-	public void executeForceRollback()
+	public void execute()
 	{
-		logger.debug("Force rollback...");
-		Assert.assertEquals("", "ForceRollback", txScriptService.executeForceRollback("aa", "").resultMessage);
+		Assert.assertEquals("", false, txScriptService.execute("", "abcde").isFail());
 	}
 
 	@Test
-	public void execute()
+	public void executeForceRollback()
 	{
-		Assert.assertEquals("", "", txScriptService.execute("", "abcde").resultMessage);
+//		logger.debug("Force rollback...");
+		Assert.assertEquals("", "Force rollback.", txScriptService.executeForceRollback("aa", "").getResultMessage());
 	}
 
 }
