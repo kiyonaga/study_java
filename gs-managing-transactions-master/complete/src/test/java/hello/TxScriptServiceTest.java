@@ -21,13 +21,14 @@ public class TxScriptServiceTest
 	@Test
 	public void executeForceRollback()
 	{
+		logger.debug("Force rollback...");
 		Assert.assertEquals("", "ForceRollback", txScriptService.executeForceRollback("aa", "").resultMessage);
 	}
 
 	@Test
 	public void execute()
 	{
-		Assert.assertEquals("", "", txScriptService.execute("", "").resultMessage);
+		Assert.assertEquals("", "", txScriptService.execute("", "abcde").resultMessage);
 	}
 
 }

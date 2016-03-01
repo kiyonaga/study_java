@@ -1,7 +1,6 @@
 package hello;
 
 import javax.sql.DataSource;
-
 import org.junit.Assert;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,9 +28,9 @@ public class Application
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		log.info("Creating tables");
 		jdbcTemplate.execute("drop table BOOKINGS if exists");
-		jdbcTemplate.execute("create table BOOKINGS(ID serial, FIRST_NAME varchar(5) NOT NULL)");
+		jdbcTemplate.execute("create table BOOKINGS(ID serial, FIRST_NAME varchar(5) NOT NULL, s_reg_date timestamp not null default current_timestamp)");
 		jdbcTemplate.execute("drop table NOTIFIES if exists");
-		jdbcTemplate.execute("create table NOTIFIES(ID serial, FIRST_NAME varchar(5) NOT NULL)");
+		jdbcTemplate.execute("create table NOTIFIES(ID serial, FIRST_NAME varchar(5) NOT NULL, s_reg_date timestamp not null default current_timestamp)");
 		return jdbcTemplate;
 	}
 
