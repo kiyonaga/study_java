@@ -1,5 +1,6 @@
 package hello;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 @SpringBootApplication
@@ -22,7 +24,7 @@ public class Application implements CommandLineRunner
 	}
 
 	@Autowired
-	JdbcTemplate jdbcTemplate;
+	private JdbcTemplate jdbcTemplate;
 
 	@Override
 	public void run(String... strings) throws Exception
@@ -48,5 +50,25 @@ public class Application implements CommandLineRunner
 				"SELECT id, first_name, last_name FROM customers WHERE first_name = ?", new Object[] { "Josh" },
 				(rs, rowNum) -> new Customer(rs.getLong("id"), rs.getString("first_name"), rs.getString("last_name")))
 				.forEach(customer -> log.info(customer.toString()));
+
+
+		jdbcTemplate.execute("DROP TABLE foobar IF EXISTS");
+		jdbcTemplate.execute("CREATE TABLE foobar(id BIGINT not null identity, col1 VARCHAR(255), s_reg_date timestamp not null default current_timestamp)");
+
+		List<String> col1s = Arrays.asList("hoge", "fuga", "piyo", "", "", "", "", "");
+		List<Object[]> params = new ArrayList<Object[]>();
+		col1s.forEach(col1 -> params.add(new Object[]{col1}));
+		jdbcTemplate.batchUpdate("INSERT INTO foobar(col1) VALUES (?)",params );
+
+//		List<Foobar> list = jdbcTemplate.query(
+//				"SELECT id, col1, s_reg_date FROM foobar",
+//				(rs, rowNum) -> new Foobar(rs.getLong("id"), rs.getString("col1"), rs.getTimestamp("s_reg_date")));
+//		list.forEach(foobar -> log.info(foobar.toString()));
+//		jdbcTemplate.queryForList("SELECT id, col1, s_reg_date FROM foobar").forEach(map -> log.info(map.toString()));
+
+		List<Foobar> listByBP = jdbcTemplate.query(
+				"SELECT id, col1, s_reg_date FROM foobar", new BeanPropertyRowMapper<Foobar>(Foobar.class));
+		listByBP.forEach(foobar -> log.info(foobar.toString()));
+
 	}
 }
