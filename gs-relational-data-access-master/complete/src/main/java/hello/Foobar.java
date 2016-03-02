@@ -2,27 +2,29 @@ package hello;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Foobar {
 	private long id;
 	private String col1;
-	private Timestamp s_reg_date;
+	private Date s_reg_date;
 
-	public Foobar() {}
+	public Foobar() {
+	}
 
-//	public Foobar(long id, String col1, Date s_reg_date) {
-//		this.id = id;
-//		this.col1 = col1;
-//		this.s_reg_date = s_reg_date;
-//	}
-//
-//	public Foobar(long id, String col1, Timestamp s_reg_date) {
-//		this(id, col1, new Date(s_reg_date.getTime()));
-//	}
-//
+	public Foobar(long id, String col1, Date s_reg_date) {
+		this.id = id;
+		this.col1 = col1;
+		this.s_reg_date = s_reg_date;
+	}
+
+	public Foobar(long id, String col1, Timestamp s_reg_date) {
+		this(id, col1, new Date(s_reg_date.getTime()));
+	}
+
 	@Override
 	public String toString() {
-		return "Foobar [id=" + id + ", col1=" + col1 + ", s_reg_date=" +
+		return "Foobar[id=" + id + ", col1=" + col1 + ", s_reg_date=" +
 				new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(s_reg_date) + "]";
 	}
 
@@ -42,22 +44,12 @@ public class Foobar {
 		this.col1 = col1;
 	}
 
-//	public Date getS_reg_date() {
-//		return s_reg_date;
-//	}
-
-//	public void setS_reg_date(Date s_reg_date) {
-//		this.s_reg_date = s_reg_date;
-//	}
-//
-
-	public Timestamp getS_reg_date() {
-		return s_reg_date;
+	public void setS_reg_date(Date s_reg_date) {
+		this.s_reg_date = s_reg_date;
 	}
 
-
-	public void setS_reg_date(Timestamp s_reg_date) {
-		this.s_reg_date = s_reg_date;
+	public Date getS_reg_date() {
+		return s_reg_date;
 	}
 
 }
