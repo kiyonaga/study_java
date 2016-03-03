@@ -33,8 +33,8 @@ public class Application implements CommandLineRunner {
 
 		// Split up the array of whole names into an array of first/last names
 		List<Object[]> splitUpNames = Arrays.asList("John Woo", "Jeff Dean", "Josh Bloch", "Josh Long").stream()
-				.map(name -> name.split(" "))
-				.collect(Collectors.toList());
+			.map(name -> name.split(" "))
+			.collect(Collectors.toList());
 
 		// Use a Java 8 stream to print out each tuple of the list
 		splitUpNames.forEach(name -> log.info(String.format("Inserting customer record for %s %s", name[0], name[1])));
@@ -44,31 +44,38 @@ public class Application implements CommandLineRunner {
 
 		log.info("Querying for customer records where first_name = 'Josh':");
 		jdbcTemplate.query(
-				"SELECT id, first_name, last_name FROM customers WHERE first_name = ?", new Object[] { "Josh" },
-				(rs, rowNum) -> new Customer(rs.getLong("id"), rs.getString("first_name"), rs.getString("last_name")))
-				.forEach(customer -> log.info(customer.toString()));
+			"SELECT id, first_name, last_name FROM customers WHERE first_name = ?", new Object[] { "Josh" },
+			(rs, rowNum) -> new Customer(rs.getLong("id"), rs.getString("first_name"), rs.getString("last_name")))
+			.forEach(customer -> log.info(customer.toString()));
+
+		//////////
 
 		jdbcTemplate.execute("DROP TABLE foobar IF EXISTS");
 		jdbcTemplate.execute(
-				"CREATE TABLE foobar(id BIGINT not null identity, col1 VARCHAR(255), s_reg_date timestamp not null default current_timestamp)");
+			"CREATE TABLE foobar(id BIGINT not null identity, col1 VARCHAR(255), col2 varchar(255), s_reg_date timestamp not null default current_timestamp)");
 
-		Object[][] rows = new Object[][] { { "hoge" }, { "fuga" }, { "" }, { "piyo" } };
+		Object[][] rows = new Object[][] { { "hoge", "HOGE" }, { "fuga", "FUGA" }, { "", "none" }, { "piyo", "PIYO" } };
 		List<Object[]> params = new ArrayList<Object[]>();
 		for (Object[] e : rows) {
 			params.add(e);
 		}
-		jdbcTemplate.batchUpdate("INSERT INTO foobar(col1) VALUES (?)", params);
+		jdbcTemplate.batchUpdate("INSERT INTO foobar(col1, col2) VALUES (?, ?)", params);
 
-		List<Foobar> list = jdbcTemplate.query(
-				"SELECT id, col1, s_reg_date FROM foobar",
-				(rs, rowNum) -> new Foobar(rs.getLong("id"), rs.getString("col1"), rs.getTimestamp("s_reg_date")));
-		list.forEach(foobar -> log.info(foobar.toString()));
+		log.info("--- Use queryForList(Map).");
+		jdbcTemplate.queryForList("SELECT id, col1, col2, s_reg_date FROM foobar")
+			.forEach(map -> log.info(map.toString()));
 
-		jdbcTemplate.queryForList("SELECT id, col1, s_reg_date FROM foobar").forEach(map -> log.info(map.toString()));
-
+		log.info("--- Use BeanPropertyRowMapper(Foobar).");
+		// BeanPropertyRowMapperはとても便利だが、パフォーマンスを求める場合は、自前のRowMapperを実装すること。
 		List<Foobar> listByBP = jdbcTemplate.query(
-				"SELECT id, col1, s_reg_date FROM foobar", new BeanPropertyRowMapper<Foobar>(Foobar.class));
+			"SELECT id, col1, col2,  s_reg_date FROM foobar", new BeanPropertyRowMapper<Foobar>(Foobar.class));
 		listByBP.forEach(foobar -> log.info(foobar.toString()));
+
+		log.info("--- Use define RowMapper(Foobar).");
+		List<Foobar> list = jdbcTemplate.query(
+			"SELECT id, col1, col2, s_reg_date FROM foobar",
+			(rs, rowNum) -> new Foobar(rs.getLong("id"), rs.getString("col1"), rs.getString("col2"), rs.getTimestamp("s_reg_date")));
+		list.forEach(foobar -> log.info(foobar.toString()));
 
 	}
 }

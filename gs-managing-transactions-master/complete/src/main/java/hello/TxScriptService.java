@@ -21,8 +21,8 @@ public class TxScriptService
 	private TxRollbackService rollbackService;
 
 	// Pat. 3
-	//	@Autowired
-	//	private PlatformTransactionManager transactionManager;
+//		@Autowired
+//		private PlatformTransactionManager transactionManager;
 
 	/***
 	 *
@@ -61,7 +61,7 @@ public class TxScriptService
 		// 2. rollback文を実行する。
 		// 3. 明示的トランザクションを使用する。
 		//
-		// Pat. 2 がsimpleな感じ。 #ちょっとトリッキー感ある?
+		// Pat. 2 がsimpleな感じだが、ちょっとトリッキー感ある? rollback文をコミットするので、TransactionManagerはcommitとなる。
 
 		// Pat. 3
 		//		DefaultTransactionDefinition def = new DefaultTransactionDefinition();

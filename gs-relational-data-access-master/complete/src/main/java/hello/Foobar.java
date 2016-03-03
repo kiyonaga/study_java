@@ -7,25 +7,33 @@ import java.util.Date;
 public class Foobar {
 	private long id;
 	private String col1;
-	private Date s_reg_date;
+	private String col2;
+	private Date sRegDate;
 
+	///// for define RowMapper.
 	public Foobar() {
 	}
 
-	public Foobar(long id, String col1, Date s_reg_date) {
+	///// for define RowMapper.
+	public Foobar(long id, String col1, String col2, Date sRegDate) {
 		this.id = id;
 		this.col1 = col1;
-		this.s_reg_date = s_reg_date;
+		this.col2 = col2;
+		this.sRegDate = sRegDate;
 	}
 
-	public Foobar(long id, String col1, Timestamp s_reg_date) {
-		this(id, col1, new Date(s_reg_date.getTime()));
+	///// for define RowMapper.
+	public Foobar(long id, String col1, String col2, Timestamp sRegDate) {
+		this(id, col1, col2, new Date(sRegDate.getTime()));
 	}
 
 	@Override
 	public String toString() {
-		return "Foobar[id=" + id + ", col1=" + col1 + ", s_reg_date=" +
-				new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(s_reg_date) + "]";
+		return "Foobar [id=" + id + ", col1=" + col1 + ", col2=" + col2 + ", sRegDate=" + date2String(sRegDate) + "]";
+	}
+
+	public String date2String(Date date) {
+		return date == null ? "(null)" : new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(date);
 	}
 
 	public long getId() {
@@ -44,12 +52,21 @@ public class Foobar {
 		this.col1 = col1;
 	}
 
-	public void setS_reg_date(Date s_reg_date) {
-		this.s_reg_date = s_reg_date;
+	public String getCol2() {
+		return col2;
 	}
 
-	public Date getS_reg_date() {
-		return s_reg_date;
+	public void setCol2(String col2) {
+		this.col2 = col2;
 	}
+
+	public Date getsRegDate() {
+		return sRegDate;
+	}
+
+	public void setsRegDate(Date sRegDate) {
+		this.sRegDate = sRegDate;
+	}
+
 
 }
