@@ -1,8 +1,7 @@
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-public class XMLResourceBundle
-{
+public class XMLResourceBundle {
 	private static final XMLResourceBundleControl xmlctl = new XMLResourceBundleControl();
 
 	/**
@@ -10,8 +9,7 @@ public class XMLResourceBundle
 	 * @param baseName
 	 * @return
 	 */
-	public static final ResourceBundle getBundle(String baseName)
-	{
+	public static final ResourceBundle getBundle(String baseName) {
 		return ResourceBundle.getBundle(baseName, xmlctl);
 	}
 
@@ -21,8 +19,7 @@ public class XMLResourceBundle
 	 * @param locale
 	 * @return
 	 */
-	public static final ResourceBundle getBundle(String baseName, Locale locale)
-	{
+	public static final ResourceBundle getBundle(String baseName, Locale locale) {
 		return ResourceBundle.getBundle(baseName, locale, xmlctl);
 	}
 
