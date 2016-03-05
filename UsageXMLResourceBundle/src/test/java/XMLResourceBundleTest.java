@@ -16,6 +16,6 @@ public class XMLResourceBundleTest {
 
 		rb = XMLResourceBundle.getBundle("mail", Locale.JAPAN);
 		logger.debug("button.name: {}", rb.getString("button.name"));
-		assertTrue("button.name", rb.getString("button.name").equals("ほほほ"));
+		assertTrue("button.name", rb.getString("button.name").equals("へへへ"));
 	}
 }
