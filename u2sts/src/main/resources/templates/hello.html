@@ -12,12 +12,14 @@
 			<tr>
 				<th>ID</th>
 				<th>Value</th>
+				<th>Col2</th>
 				<th>Value2</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr th:each="rowMap : ${list}">
-				<td th:each="column : ${rowMap}" th:text="${column.value}">1</td>
+				<td th:each="entry : ${rowMap}" th:text="${entry.value}">1</td>
+				<td th:remove="all" th:each="entry : ${rowMap}" th:text="${entry.key}">1</td>
 				<td th:remove="all">value</td>
 				<td th:remove="all">value2</td>
 			</tr>
