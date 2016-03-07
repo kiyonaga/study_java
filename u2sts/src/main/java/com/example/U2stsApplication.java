@@ -15,9 +15,6 @@ public class U2stsApplication
 {
 	private static final Logger log = LoggerFactory.getLogger(U2stsApplication.class);
 
-//	@Autowired
-//	private JdbcTemplate jdbc;
-
 	@Autowired
 	private HogeService svc;
 

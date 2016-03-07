@@ -4,7 +4,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +20,7 @@ public class HogeService
 
 	public void init()
 	{
-		String sql = "CREATE TABLE if not exists TEST_TABLE (ID INTEGER NOT NULL IDENTITY, VALUE VARCHAR(256))";
+		String sql = "CREATE TABLE if not exists TEST_TABLE (ID INTEGER NOT NULL IDENTITY, VALUE VARCHAR(256), col2 varchar(255), value2 varchar(255))";
 		jdbc.execute(sql);
 		logger.info("Called init. sql={}", sql);
 	}
