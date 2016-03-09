@@ -10,8 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import ninja.cero.sqltemplate.core.SqlTemplate;
 
 @SpringBootApplication
 public class Application implements CommandLineRunner {
@@ -23,6 +26,14 @@ public class Application implements CommandLineRunner {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	@Autowired
+	private SqlTemplate template;
+
+	@Bean
+  SqlTemplate sqlTemplate(JdbcTemplate jdbcTemplate, NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
+      return new SqlTemplate(jdbcTemplate, namedParameterJdbcTemplate);
+  }
+
 
 	@Override
 	public void run(String... strings) throws Exception {
@@ -76,6 +87,9 @@ public class Application implements CommandLineRunner {
 			"SELECT id, col1, col2, s_reg_date FROM foobar",
 			(rs, rowNum) -> new Foobar(rs.getLong("id"), rs.getString("col1"), rs.getString("col2"), rs.getTimestamp("s_reg_date")));
 		list.forEach(foobar -> log.info(foobar.toString()));
+
+		List<NotifiesVo> emps = template.forList("sql/selectAll.sql", NotifiesVo.class);
+		emps.forEach(e -> log.info(e.getFirst_name()));
 
 	}
 }
