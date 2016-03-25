@@ -25,10 +25,22 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jdbc</artifactId>
 		</dependency>
+		<!--
+		 -->
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 		</dependency>
+    <!-- OJDBC6用 Maven Centralから持ってこれないので以下のコマンドを実行 -->
+    <!-- ローカルのjarをローカルMavenリポジトリに入れる -->
+    <!-- mvn install:install-file -Dfile=ojdbc6.jar -DgroupId=com.oracle -DartifactId=ojdbc6 -Dversion=11.2.0 -Dpackaging=jar -->
+    <!--
+    <dependency>
+      <groupId>com.oracle</groupId>
+      <artifactId>ojdbc6</artifactId>
+      <version>11.2.0</version>
+    </dependency>
+     -->
 
 		<dependency>
 			<groupId>ninja.cero.bootiful-sqltemplate</groupId>
