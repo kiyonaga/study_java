@@ -5,7 +5,7 @@
  * @author kiyo, @date 16/02/09 23:33
  */
 public class Library {
-    public boolean someLibraryMethod() {
-        return true;
-    }
+	public boolean someLibraryMethod() {
+		return true;
+	}
 }

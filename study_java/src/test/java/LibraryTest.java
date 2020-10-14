@@ -5,11 +5,9 @@ import org.junit.Test;
 /**
  *
  */
-public class LibraryTest
-{
+public class LibraryTest {
 	@Test
-	public void testSomeLibraryMethod()
-	{
+	public void testSomeLibraryMethod() {
 		Library classUnderTest = new Library();
 		assertTrue("someLibraryMethod should return 'true'", classUnderTest.someLibraryMethod());
 	}

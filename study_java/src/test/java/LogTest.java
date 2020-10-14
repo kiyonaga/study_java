@@ -8,14 +8,12 @@ import org.slf4j.LoggerFactory;
  *
  * アプリケーションからorg.apache.logging.log4の利用を禁止する(コンパイルエラーとする)方法はないか？
  */
-public class LogTest
-{
+public class LogTest {
 	private static final Logger logger = LoggerFactory.getLogger(LogTest.class); // caller class nameを自動で設定してくれるI/Fはなさそう。
 	//	private static final org.apache.logging.log4j.Logger log4j = LogManager.getLogger();
 
 	@Test
-	public void test()
-	{
+	public void test() {
 		logger.debug("Log test {} {} {}.", "1", "22", "333");
 		//		log4j.debug("Log test {} {} {}.", "1", "22", "333");
 	}
